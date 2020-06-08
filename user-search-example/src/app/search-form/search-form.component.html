@@ -1,8 +1,42 @@
-<form #userForm="ngForm" (ngSubmit)="onSubmit()">
-    <fieldset>
-        <legend>Find a User</legend>
-        <label for="user">enter a user name</label>
-        <input type="text" name="user" id="user" [(ngModel)]="userName"/>
-        <button type="submit">Search For Users</button>
-    </fieldset>
-</form>
+<section class="container py-3">
+    <div class="row justify-content-center">
+        <form #userForm="ngForm" (ngSubmit)="onSubmit()" class="col-12 col-sm-4">
+            <fieldset>
+                <div class="form-group">
+                    <label for="user">Enter a user name:</label>
+                    <input type="text" name="user" id="user" [(ngModel)]="userName" class="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Search For Users</button>
+            </fieldset>
+        </form>
+    </div>
+</section>
+
+<section *ngIf="totalUsers && totalUsers > 0" class="p-3">
+    <p class="lead text-center">Total Users Found: {{totalUsers}}</p>
+    <nav>
+        <ul class="nav nav-pills">
+            <li *ngFor="let page of totalPagesArray" class="nav-item pr-1">
+                <button  (click)="changePage(page)" class="nav-link btn btn-light small">{{page}}</button>
+            </li>
+        </ul>
+    </nav>
+    <div class="row justify-content-center">
+        <p-table [value]="userArray" class="col-12 col-sm-4">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th colspan="3">User</th>
+                    <th>Profile</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr class="border rounded">
+                    <td class="py-2 pl-2"><img src={{user.avatar_url}} width="100"/></td>
+                    <td class="py-2">{{user.login}}</td>
+                    <td class="py-2"></td>
+                    <td class="py-2 pr-2"><a href={{user.url}} class="btn btn-secondary">Go to Profile</a></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</section>

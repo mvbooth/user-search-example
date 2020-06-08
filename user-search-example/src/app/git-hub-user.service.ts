@@ -10,11 +10,12 @@ export class GitHubUserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(userString) {
+  getUsers(userString, toPage) {
     return this.http.get(`${this.gitUserSearchUrl}`,{
       params: {
         q: userString,
-        per_page: '50'
+        per_page: '50',
+        page: toPage
       },
       observe: 'response'
     });

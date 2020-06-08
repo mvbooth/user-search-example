@@ -1,0 +1,8 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend>Find a User</legend>
+        <label for="user">enter a user name</label>
+        <input type="text" name="user" id="user" [(ngModel)]="userName"/>
+        <button type="submit">Search For Users</button>
+    </fieldset>
+</form>
